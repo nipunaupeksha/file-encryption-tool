@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1603740191 source:f:\projects\26.10.2020\encrypt\main.c
+	<stdio.h>
+	<string.h>
+
