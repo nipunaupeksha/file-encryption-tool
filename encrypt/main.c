@@ -63,7 +63,7 @@ void print_first_five(char *filename){
     fclose(fileptr); // Close the file
     int i=0;
     for(i=0;i<5;i++){
-        printf("%x\n",buffer[i]);
+        printf("%02x \n",buffer[i]);
     }
 }
 void make_new_name(char *new_name, char *original_name){
@@ -101,7 +101,9 @@ void perform_XOR(char *input_filename, char *output_filename, char *password){
     do {
         numBytes = fread(block, 1, blockSize, file);
         for (i=0; i<numBytes; i++){
+            //printf("%c\t%x",block[i],block[i]);
             block[i] = block[i]^password[i];
+
         }
         // write the result of XOR to the output file
         fwrite(block, 1, numBytes, newFile);
