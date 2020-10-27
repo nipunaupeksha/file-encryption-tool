@@ -11,7 +11,7 @@ void print_first_five(char *filename);
 
 int main(int argc, char *argv[]) {
     char original_name[100];
-    char password[100];
+    char password[15];
     char new_name[100];
     scanf("%s%s",original_name,password);
     make_new_name(&new_name,&original_name);
@@ -30,7 +30,7 @@ void print_first_five(char *filename){
     char *buffer;
     long filelen;
 
-    fileptr = fopen(filename, "rb");
+    fileptr = fopen(filename, "r");
     fseek(fileptr, 0, SEEK_END);
     filelen = ftell(fileptr);
     rewind(fileptr);
@@ -40,7 +40,7 @@ void print_first_five(char *filename){
     fclose(fileptr);
     int i=0;
     for(i=0;i<5;i++){
-        printf("%02x \n",buffer[i]);
+        printf("%02x\n",buffer[i]&0xff);
     }
 }
 void make_new_name(char *new_name, char *original_name){
@@ -70,6 +70,7 @@ void perform_XOR(char *input_filename, char *output_filename, char *password){
     int blockSize =  length_of_password(password);
     FILE *file, *newFile;
     char block[blockSize];
+    //char decrypt[blockSize];
     int i, numBytes;
     file = fopen(input_filename, "rb");
     newFile = fopen(output_filename, "wb");
@@ -77,8 +78,10 @@ void perform_XOR(char *input_filename, char *output_filename, char *password){
         numBytes = fread(block, 1, blockSize, file);
         for (i=0; i<numBytes; i++){
             block[i] = block[i]^password[i];
+            //decrypt[i]=block[i]^password[i];
         }
         fwrite(block, 1, numBytes, newFile);
+        //printf("decrypt: %s\n",decrypt);
       } while (numBytes == blockSize);
 
       fclose(newFile);
@@ -140,3 +143,4 @@ int is_valid_password(char *password){
     return 0;
 }
 
+//Reference https://www.cs.bu.edu/teaching/
