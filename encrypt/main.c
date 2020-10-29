@@ -11,6 +11,11 @@ void print_first_five(char *filename);
 
 int main(int argc, char *argv[]) {
 
+    if(argc!=3){
+        printf("Usage ./A2 filename password");
+        return 0;
+    }
+
     char original_name[100];
     char password[15];
     strcpy(original_name,argv[1]);
