@@ -10,10 +10,14 @@ void perform_XOR(char *input_filename, char *output_filename, char *password);
 void print_first_five(char *filename);
 
 int main(int argc, char *argv[]) {
+
     char original_name[100];
     char password[15];
+    strcpy(original_name,argv[1]);
+    strcpy(password,argv[2]);
     char new_name[100];
-    scanf("%s%s",original_name,password);
+
+    //scanf("%s%s",original_name,password);
     make_new_name(&new_name,&original_name);
     printf("New filename = %s\n",new_name);
     int password_validation = is_valid_password(&password);
